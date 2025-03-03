@@ -26,13 +26,19 @@ export default function Home() {
       {/* About College Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">About PVG COET</h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Pune Vidhyarthi Griha's College of Engineering and Technology (PVG's COET) 
-            is committed to excellence in engineering education, research, and innovation. 
-            Established with a vision to create future-ready engineers, we foster an 
-            environment of learning and growth.
-          </p>
+          <div className="flex items-center">
+            <img src="/5-COET.jpg" alt="PVG COET" className="w-1/3 h-auto mr-4" />
+            <div className="text-center">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">About PVG COET</h2>
+              <p className="text-lg text-gray-600" >
+                Pune Vidhyarthi Griha's College of Engineering and Technology (PVG's COET) 
+                is committed to excellence in engineering education, research, and innovation. 
+                Established with a vision to create future-ready engineers, we foster an 
+                environment of learning and growth.
+
+              </p>
+            </div>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
