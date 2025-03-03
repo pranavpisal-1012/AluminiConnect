@@ -204,6 +204,50 @@ export default function Mentorship() {
         )}
       </div>
 
+      {/* Informative Content Section */}
+      {!user && (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+          <div className="p-4 border border-gray-300 rounded-md bg-white shadow-md">
+            <h2 className="text-xl font-semibold mb-2">What is Mentorship?</h2>
+            <p className="text-gray-700">
+              Mentorship is a developmental relationship where a more experienced individual provides guidance, support, and advice to a less experienced person.
+            </p>
+          </div>
+          <div className="p-4 border border-gray-300 rounded-md bg-white shadow-md">
+            <h2 className="text-xl font-semibold mb-2">Benefits of Mentorship</h2>
+            <ul className="list-disc list-inside text-gray-700">
+              <li>Enhanced skills and knowledge transfer.</li>
+              <li>Networking opportunities and professional growth.</li>
+              <li>Increased confidence and personal development.</li>
+            </ul>
+          </div>
+          <div className="p-4 border border-gray-300 rounded-md bg-white shadow-md">
+            <h2 className="text-xl font-semibold mb-2">Types of Mentorship</h2>
+            <p className="text-gray-700">
+              Mentorship can be formal or informal, peer-based, group-based, or even reverse mentorship where less experienced individuals mentor more experienced ones.
+            </p>
+          </div>
+          <div className="p-4 border border-gray-300 rounded-md bg-white shadow-md">
+            <h2 className="text-xl font-semibold mb-2">How to Find a Mentor</h2>
+            <p className="text-gray-700">
+              Look for someone in your field of interest, attend networking events, or use platforms designed for mentorship connections.
+            </p>
+          </div>
+          <div className="p-4 border border-gray-300 rounded-md bg-white shadow-md">
+            <h2 className="text-xl font-semibold mb-2">Becoming a Mentor</h2>
+            <p className="text-gray-700">
+              Share your knowledge and experiences, provide guidance, and help others grow in their personal and professional lives.
+            </p>
+          </div>
+          <div className="p-4 border border-gray-300 rounded-md bg-white shadow-md">
+            <h2 className="text-xl font-semibold mb-2">Mentorship Best Practices</h2>
+            <p className="text-gray-700">
+              Establish clear goals, maintain open communication, and provide constructive feedback to foster a successful mentorship relationship.
+            </p>
+          </div>
+        </div>
+      )}
+
       {showNewQuestion && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-lg p-6 max-w-2xl w-full">
@@ -369,7 +413,7 @@ export default function Mentorship() {
               <div className="flex items-start space-x-3">
                 <div className="flex-shrink-0">
                   <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
-                    <User className="h-6 w-6 text-blue-600" />
+                    <User  className="h-6 w-6 text-blue-600" />
                   </div>
                 </div>
                 <div>
@@ -414,10 +458,11 @@ export default function Mentorship() {
                   {question.mentorship_answers.map((answer) => (
                     <div key={answer.id} className="bg-gray-50 rounded-lg p-4">
                       <div className="flex items-center space-x-2 mb-2">
-                        <User className="h-4 w-4 text-gray-500" />
-                        <span className="text-sm font-medium">{answer.users.full_name}</span>
-                        <span className="text-sm text-gray-500">
-                          • {format(new Date(answer.created_at), 'MMM d, yyyy')}
+                        <User  className="h-4 w-4 text-gray-500" />
+                        <span className="font-medium">{answer.users.full_name}</span>
+                        <span className="text-gray-500">•</span>
+                        <span className="text-gray-500 text-sm">
+                          {format(new Date(answer.created_at), 'MMM d, yyyy')}
                         </span>
                       </div>
                       <p className="text-gray-600">{answer.content}</p>

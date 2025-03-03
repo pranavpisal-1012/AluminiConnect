@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../contexts/AuthContext';
 import { format } from 'date-fns';
-import { Pencil, MessageCircle, Calendar, User, Image as ImageIcon, X } from 'lucide-react';
+import { MessageCircle, Calendar, User, X } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 interface BlogPost {
@@ -94,7 +94,7 @@ export default function Blog() {
           {
             title: newPost.title,
             content: newPost.content,
-            image_url: newPost.image_url || 'https://source.unsplash.com/random/800x400/?technology',
+            image_url: newPost.image_url || 'https://source.unsplash.com/800x400/?technology',
             image_alt: newPost.image_alt || newPost.title,
             author_id: user.id,
           },
@@ -162,10 +162,58 @@ export default function Blog() {
         )}
       </div>
 
+      {/* Informative Content for New Users */}
+      {!user && (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+          <div className="p-4 border border-gray-300 rounded-md bg-white shadow-md">
+            <h2 className="text-xl font-semibold mb-2">Welcome to the Technical Blog!</h2>
+            <p className="text-gray-700">
+              This platform allows you to share your knowledge and insights on various technical topics. 
+              Engage with the community by exploring existing posts and contributing your own.
+            </p>
+          </div>
+          <div className="p-4 border border-gray-300 rounded-md bg-white shadow-md">
+            <h2 className="text-xl font-semibold mb-2">How to Write a Post</h2>
+            <p className="text-gray-700">
+              Click on the "Write a Post" button to create a new blog entry. You can add a title, content, 
+              and an optional image. Ensure your content is informative and relevant to the technical community.
+            </p>
+          </div>
+          <div className="p-4 border border-gray-300 rounded-md bg-white shadow-md">
+            <h2 className="text-xl font-semibold mb-2">Benefits of Participating</h2>
+            <p className="text-gray-700">
+              By sharing your knowledge, you help others learn and grow. Engaging with the community can also 
+              enhance your own understanding of technical topics and provide valuable networking opportunities.
+            </p>
+          </div>
+          <div className="p-4 border border-gray-300 rounded-md bg-white shadow-md">
+            <h2 className="text-xl font-semibold mb-2">Commenting Guidelines</h2>
+            <p className="text-gray-700">
+              We encourage constructive feedback and discussions. Please be respectful and avoid spam or 
+              inappropriate content. Your comments help foster a positive community!
+            </p>
+          </div>
+          <div className="p-4 border border-gray-300 rounded-md bg-white shadow-md">
+            <h2 className="text-xl font-semibold mb-2">Engage with the Community</h2>
+            <p className="text-gray-700">
+              Join discussions, ask questions, and connect with like-minded individuals in the tech community. 
+              Your participation enriches the experience for everyone.
+            </p>
+          </div>
+          <div className="p-4 border border-gray-300 rounded-md bg-white shadow-md">
+            <h2 className="text-xl font-semibold mb-2">Stay Updated</h2>
+            <p className="text-gray-700">
+              Follow the latest trends and technologies by reading posts from other community members. 
+              Stay informed and enhance your skills through shared knowledge.
+            </p>
+          </div>
+        </div>
+      )}
+
       {/* Create Post Modal */}
       {showNewPost && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg p-6 max-w-2xl w-full">
+          <div className="bg-white rounded-lg p-6 max-w-2xl w-full transition-transform transform scale-100 hover:scale-105">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-semibold">Create New Post</h2>
               <button onClick={() => setShowNewPost(false)} className="text-gray-500 hover:text-gray-700">
@@ -225,7 +273,7 @@ export default function Blog() {
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
                 >
                   Publish
                 </button>
@@ -241,7 +289,7 @@ export default function Blog() {
           <div className="bg-white rounded-lg max-w-4xl w-full my-8">
             <div className="relative">
               <img
-                src={selectedPost.image_url || 'https://source.unsplash.com/random/800x400/?technology'}
+                src={selectedPost.image_url || 'https://source.unsplash.com/800x400/?technology'}
                 alt={selectedPost.image_alt || selectedPost.title}
                 className="w-full h-64 object-cover rounded-t-lg"
               />
@@ -255,7 +303,7 @@ export default function Blog() {
             <div className="p-6">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">{selectedPost.title}</h2>
               <div className="flex items-center text-gray-500 text-sm mb-6">
-                <User className="h-4 w-4 mr-1" />
+                <User  className="h-4 w-4 mr-1" />
                 <span>{selectedPost.users?.full_name || 'Anonymous'}</span>
                 <span className="mx-2">•</span>
                 <Calendar className="h-4 w-4 mr-1" />
@@ -271,10 +319,10 @@ export default function Blog() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {posts.map((post) => (
-          <div key={post.id} className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-[500px]">
+          <div key={post.id} className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-[500px] transition-transform transform hover:scale-105">
             <div className="aspect-w-16 aspect-h-9">
               <img
-                src={post.image_url || 'https://source.unsplash.com/random/800x400/?technology'}
+                src={post.image_url || 'https://source.unsplash.com/800x400/?technology'}
                 alt={post.image_alt || post.title}
                 className="object-cover w-full h-full cursor-pointer"
                 onClick={() => setSelectedPost(post)}
@@ -288,7 +336,7 @@ export default function Blog() {
                 {post.title}
               </h2>
               <div className="flex items-center text-gray-500 text-sm mb-4">
-                <User className="h-4 w-4 mr-1" />
+                <User  className="h-4 w-4 mr-1" />
                 <span>{post.users?.full_name || 'Anonymous'}</span>
                 <span className="mx-2">•</span>
                 <Calendar className="h-4 w-4 mr-1" />
@@ -322,7 +370,7 @@ export default function Blog() {
                   {post.comments?.map((comment) => (
                     <div key={comment.id} className="bg-white rounded-lg p-4 shadow-sm">
                       <div className="flex items-center space-x-2 mb-2">
-                        <User className="h-4 w-4 text-gray-500" />
+                        <User  className="h-4 w-4 text-gray-500" />
                         <span className="font-medium">{comment.users.full_name}</span>
                         <span className="text-gray-500">•</span>
                         <span className="text-gray-500 text-sm">
